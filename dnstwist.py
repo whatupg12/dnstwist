@@ -202,8 +202,8 @@ class UrlParser():
 			return False
 		if domain[-1] == '.':
 			domain = domain[:-1]
-		allowed = re.compile('\A([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\Z', re.IGNORECASE)
-		return allowed.match(domain)
+		allowed = re.compile('\A([a-z0-9]+([\-a-z0-9]+)*\.)+[a-z]{2,}\Z', re.IGNORECASE)
+		return not domain.startswith("xn--") and allowed.match(domain)
 
 	def get_full_uri(self):
 		return self.scheme + '://' + self.domain + self.path + self.query
